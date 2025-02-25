@@ -1,6 +1,9 @@
 package com.producer.models;
 
+import com.producer.models.enums.InvestmentStatus;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,6 +26,8 @@ public class Investment implements Serializable {
     private UUID id;
     private int months;
     private double value;
+    @Enumerated(EnumType.STRING)
+    private InvestmentStatus status;
 
     @ManyToOne
     private User user;
