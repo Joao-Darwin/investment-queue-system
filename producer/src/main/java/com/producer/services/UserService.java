@@ -28,6 +28,9 @@ public class UserService {
     public User update(UUID id, User user) {
         User userToUpdate = this.findById(id);
 
+        double userBalance = user.getBalance();
+        if (userBalance <= 0) throw new IllegalArgumentException("User's balance should be greater than zero. Balance: " + userBalance);
+
         userToUpdate.setName(user.getName());
         userToUpdate.setBalance(user.getBalance());
 
