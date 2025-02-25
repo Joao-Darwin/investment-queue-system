@@ -1,9 +1,11 @@
 package com.producer.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.producer.models.enums.InvestmentStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,7 +31,8 @@ public class Investment implements Serializable {
     @Enumerated(EnumType.STRING)
     private InvestmentStatus status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference
     private User user;
 
     public UUID getId() {

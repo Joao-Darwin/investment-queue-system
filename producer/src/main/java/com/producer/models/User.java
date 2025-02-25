@@ -1,6 +1,8 @@
 package com.producer.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -9,6 +11,7 @@ import jakarta.persistence.Table;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -26,8 +29,8 @@ public class User implements Serializable {
     private String name;
     private double balance;
 
-    @OneToMany(mappedBy = "user")
-    private List<Investment> investments;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    private List<Investment> investments = new ArrayList<>();
 
     public UUID getId() {
         return id;
