@@ -59,4 +59,12 @@ public class Investment implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public InvestmentStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(InvestmentStatus status) {
+        this.status = status;
+    }
 }
