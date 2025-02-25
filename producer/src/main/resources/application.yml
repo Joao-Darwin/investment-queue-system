@@ -3,9 +3,9 @@ spring:
     name: producer
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/database?useTimezone=true&serverTimezone=UTC
+    url: jdbc:postgresql://localhost:5432/producer?useTimezone=true&serverTimezone=UTC
     username: postgres
-    password: password
+    password: postgres
   jpa:
     hibernate:
       ddl-auto: update
