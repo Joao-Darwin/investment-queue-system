@@ -1,0 +1,46 @@
+networks:
+  producer_network:
+    name: producer_network
+
+volumes:
+  producer_volume:
+    name: producer_volume
+
+services:
+  producer_api:
+    container_name: producer_api
+    build: ./
+    ports:
+      - "8080:8080"
+    expose:
+      - 8080
+    depends_on:
+      - producer_postgres
+    command: mvn spring-boot:run
+    restart: always
+    env_file:
+      - .env
+    environment:
+      SPRING.DATASOURCE.URL: ${DATABASE_URL}
+      SPRING.DATASOURCE.USERNAME: ${DATABASE_USER}
+      SPRING.DATASOURCE.PASSWORD: ${DATABASE_PASSWORD}
+    networks:
+      - producer_network
+  producer_postgres:
+    container_name: producer_postgres
+    image: postgres:17.2
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    expose:
+      - 5432
+    networks:
+      - producer_network
+    volumes:
+      - producer_volume:/var/lib/postgres
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
