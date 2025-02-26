@@ -11,3 +11,9 @@ spring:
       ddl-auto: update
     show_sql: false
     open-in-view: false
+  rabbitmq:
+    host: localhost
+    port: 5672
+    stream:
+      username: admin
+      password: admin
