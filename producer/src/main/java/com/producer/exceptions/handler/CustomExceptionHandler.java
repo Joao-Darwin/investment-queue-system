@@ -1,6 +1,6 @@
 package com.producer.exceptions.handler;
 
-import com.producer.exceptions.handler.exceptions.ResponseEntityException;
+import com.producer.exceptions.ResponseEntityException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
