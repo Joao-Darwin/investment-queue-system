@@ -1,4 +1,10 @@
-spring:
+rabbitmq:
+  queue:
+    name: invest_queue
+  exchange:
+    name: invest_exchange
+  routing:
+    key: invest_routing_key
   application:
     name: producer
   datasource:
@@ -14,6 +20,5 @@ spring:
   rabbitmq:
     host: localhost
     port: 5672
-    stream:
-      username: admin
-      password: admin
+    username: admin
+    password: admin
