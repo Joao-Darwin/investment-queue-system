@@ -6,6 +6,7 @@ import com.producer.models.enums.InvestmentStatus;
 import com.producer.repositores.InvestmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -14,13 +15,16 @@ public class InvestmentService {
 
     private final UserService userService;
     private final InvestmentRepository investmentRepository;
+    private final RabbitMQService rabbitMQService;
 
     @Autowired
-    public InvestmentService(UserService userService, InvestmentRepository investmentRepository) {
+    public InvestmentService(UserService userService, InvestmentRepository investmentRepository, RabbitMQService rabbitMQService) {
         this.userService = userService;
         this.investmentRepository = investmentRepository;
+        this.rabbitMQService = rabbitMQService;
     }
 
+    @Transactional
     public Investment create(Investment investment) {
         User user = this.userService.findById(investment.getUser().getId());
 
@@ -35,7 +39,11 @@ public class InvestmentService {
         this.userService.update(user.getId(), user);
 
         investment.setStatus(InvestmentStatus.PROCESSING);
-        return this.investmentRepository.save(investment);
+        Investment createdInvestment = this.investmentRepository.save(investment);
+
+        rabbitMQService.sendMessage(createdInvestment);
+
+        return createdInvestment;
     }
 
     public Investment findById(UUID id) {
