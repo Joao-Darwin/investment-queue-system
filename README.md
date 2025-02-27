@@ -129,6 +129,21 @@ mvn spring-boot:run
 ```bash
 cd consumer
 ```
+### Renomear arquivo com ENVs
+```bash
+cp .env.example .env
+```
+### Adicionar ENVs
+```bash
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_USER=postgres
+DATABASE_PASSWORD=postgres
+DATABASE_NAME=producer
+
+RABBITMQ_URL=amqp://admin:admin@localhost:5672
+QUEUE_NAME=invest_queue
+```
 ### Instalar depedências
 ```bash
 npm i
@@ -137,3 +152,8 @@ npm i
 ```bash
 npm start
 ```
+Após execução de todos os passos teremos:
+- Producer rodando na porta `8080`
+- Banco de Dados rodando na porta `5432`
+- Middleware rodando na porta `5672`
+- Consumer escutando o middleware
