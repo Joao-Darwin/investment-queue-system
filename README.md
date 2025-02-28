@@ -121,7 +121,7 @@ sudo mvn clean install
 ```
 ### Executar o projeto
 ```bash
-mvn spring-boot:run
+sudo mvn spring-boot:run
 ```
 <h2>Consumer (Typescript + NodeJS)</h2>
 
