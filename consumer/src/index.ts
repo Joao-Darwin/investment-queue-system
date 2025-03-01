@@ -26,6 +26,7 @@ async function consumeMessage() {
               return channel.nack(msg, false, false);
             }
   
+            await new Promise(resolve => setTimeout(resolve, 1000));
             await updateInvestmentStatus(investment.id);
   
             channel.ack(msg);
