@@ -157,3 +157,6 @@ Após execução de todos os passos teremos:
 - Banco de Dados rodando na porta `5432`
 - Middleware rodando na porta `5672`
 - Consumer escutando o middleware
+
+## Vídeo demonstrativo
+<a target="_blank" href="https://youtu.be/CW7PwLC_hZA">Youtube</a>
